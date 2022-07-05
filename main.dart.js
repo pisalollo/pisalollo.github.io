@@ -55226,7 +55226,7 @@ b4(){this.by()
 this.iu()},
 O(b7,b8){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2=this,b3=null,b4=t.w,b5=b8.W(b4).f.a.b,b6=b8.W(b4).f.a.a
 b4=A.at(5,252,228,236)
-s=A.up(b3,A.Es(new A.t_(A.alT(b3,b3,new A.qL("assets/assetslogojollyombra.png",b3,b3)),b3),b5/4,b3),b3,b3,b3,b3,b5/9,b3)
+s=A.up(b3,A.Es(new A.t_(A.alT(b3,b3,new A.qL("assets/logojollyombra.png",b3,b3)),b3),b5/4,b3),b3,b3,b3,b3,b5/9,b3)
 r=b5/12
 q=t.sq
 p=A.a([new A.fc(2,B.dQ,A.at(13,0,0,0),B.k,5)],q)
@@ -55273,13 +55273,13 @@ var $async$iu=A.Y(function(a,b){if(a===1)return A.U(b,r)
 while(true)switch(s){case 0:o=$.kC()
 n=A
 s=3
-return A.R(o.FD("assets/assets/menu.json"),$async$iu)
+return A.R(o.FD("assets/menu.json"),$async$iu)
 case 3:s=2
 return A.R(n.aqv(b),$async$iu)
 case 2:q.d=b
 n=B.a1
 s=4
-return A.R(o.FD("assets/assets/orari.json"),$async$iu)
+return A.R(o.FD("assets/orari.json"),$async$iu)
 case 4:o=n.cb(0,b)
 p=J.ao(o)
 s=5
