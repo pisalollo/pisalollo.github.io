@@ -1,0 +1,122 @@
+[
+    {
+        "categoria":"Aperitivi",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    },
+    {
+        "categoria":"Bar",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    },
+    {
+        "categoria":"Caffetteria",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    },
+    {
+        "categoria":"Gelateria",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    },
+    {
+        "categoria":"Pasticceria",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    },
+    {
+        "categoria":"Snack",
+        "elementi":[
+            {
+                "nome":"Titolo 1",
+                "prezzo":"5.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 2",
+                "prezzo":"0.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            },
+            {
+                "nome":"Titolo 3",
+                "prezzo":"2.5",
+                "descrizione":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+            }
+        ]
+    }
+]
