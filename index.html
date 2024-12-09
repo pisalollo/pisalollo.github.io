@@ -6,17 +6,30 @@
     <title>Portfolio - Lorenzo Pisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #0044cc;
+            --secondary-color: #ffffff;
+            --dark-mode-bg: #001122;
+            --dark-mode-text: #ffffff;
+            --light-mode-text: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+        }
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            color: #333;
-            background-color: #f4f4f4;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         header {
-            background: #333;
-            color: #fff;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--primary-color);
             padding: 1rem 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         header h1 {
             margin: 0;
@@ -25,36 +38,114 @@
             margin-top: 10px;
         }
         nav a {
-            color: #fff;
+            color: var(--primary-color);
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
+            cursor: pointer;
         }
         .container {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 1rem;
-            background: #fff;
+            background: var(--secondary-color);
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .project {
-            margin-bottom: 2rem;
+        .slider {
+            display: flex;
+            overflow: hidden;
+            margin: 1rem 0;
+            position: relative;
+            touch-action: pan-y;
+            flex-direction: column; /* Oriented vertically */
+            align-items: center;
         }
-        .project h2 {
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slider .project {
+            width: 80%; /* Box smaller than container */
+            max-width: 350px;
+            flex: 0 0 auto;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .project h3 {
             margin-top: 0;
         }
-        .footer {
+        .slider-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .slider-button {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0 5px;
+        }
+        .section {
+            margin-top: 2rem;
+        }
+        footer {
             text-align: center;
             margin-top: 2rem;
-            color: #777;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--secondary-color);
         }
-        a {
-            color: #007BFF;
-            text-decoration: none;
+        .dark-mode {
+            background-color: var(--dark-mode-bg);
+            color: var(--dark-mode-text);
         }
-        a:hover {
-            text-decoration: underline;
+        .dark-mode .project {
+            color: var(--light-mode-text); /* Dark mode text should be light for visibility */
+        }
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s;
+        }
+        .dark-mode-toggle:hover {
+            background: #0033aa;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .slider .project {
+                width: 90%; /* Smaller width for mobile devices */
+                max-width: 300px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
@@ -64,6 +155,9 @@
         <nav>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
@@ -72,28 +166,90 @@
             <h2>About Me</h2>
             <p>Welcome to my portfolio! My name is Lorenzo Pisa, and I am a Mathematics graduate specializing in quantitative finance and data analysis. Explore my projects and feel free to reach out!</p>
         </section>
-        <section id="projects">
+        <section id="projects" class="section">
             <h2>Projects</h2>
-            <div class="project">
-                <h3>Data Analysis of Inflation and Economic Variables</h3>
-                <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
-            </div>
-            <div class="project">
-                <h3>Quantitative Finance Tools</h3>
-                <p>A Python-based toolkit for stochastic simulations and financial modeling.</p>
-            </div>
-            <div class="project">
-                <h3>Predictive Models with R</h3>
-                <p>Implementation of predictive analytics for economic trends using R programming.</p>
+            <div class="slider">
+                <div class="slider-track">
+                    <div class="project">
+                        <h3>Data Analysis of Inflation and Economic Variables</h3>
+                        <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
+                    </div>
+                    <div class="project">
+                        <h3>Quantitative Finance Tools</h3>
+                        <p>A Python-based toolkit for stochastic simulations and financial modeling.</p>
+                    </div>
+                    <div class="project">
+                        <h3>Predictive Models with R</h3>
+                        <p>Implementation of predictive analytics for economic trends using R programming.</p>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-button" onclick="moveSlider(-1)">←</button>
+                    <button class="slider-button" onclick="moveSlider(1)">→</button>
+                </div>
             </div>
         </section>
-        <section id="contact">
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <p>Proficient in Python, R, and quantitative modeling. Experienced with statistical analysis, data visualization, and machine learning algorithms.</p>
+        </section>
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <p>Bachelor's Degree in Mathematics for Finance and Insurance from the University of Turin.</p>
+        </section>
+        <section id="experience" class="section">
+            <h2>Work Experience</h2>
+            <p>Internship at [Company Name]: Developed financial models and analyzed economic data trends.</p>
+        </section>
+        <section id="contact" class="section">
             <h2>Contact</h2>
             <p>If you'd like to connect, feel free to reach out via <a href="mailto:lorenzo.pisa@example.com">email</a> or visit my <a href="https://github.com/lorenzopisa" target="_blank">GitHub</a>.</p>
         </section>
     </main>
-    <footer class="footer">
+    <footer>
         <p>&copy; 2024 Lorenzo Pisa. All Rights Reserved.</p>
     </footer>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">☾</button>
+    <script>
+        let currentSlide = 0;
+
+        function moveSlider(direction) {
+            const sliderTrack = document.querySelector('.slider-track');
+            const projects = document.querySelectorAll('.project');
+            const projectWidth = projects[0].offsetWidth + 20; // Account for margin
+            const maxSlides = projects.length;
+
+            currentSlide = (currentSlide + direction + maxSlides) % maxSlides;
+            sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Automatically set dark mode based on system preference
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (prefersDarkScheme) {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Add touch support for slider
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX > touchEndX) {
+                moveSlider(1); // Swipe left to move right
+            } else {
+                moveSlider(-1); // Swipe right to move left
+            }
+        });
+    </script>
 </body>
 </html>
