@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Lorenzo Pisa</title>
+    <title>Lorenzo Pisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0044cc;
+            --primary-color: #0011cc;
             --secondary-color: #ffffff;
-            --dark-mode-bg: #001122;
-            --dark-mode-text: #ffffff;
             --light-mode-text: #333333;
             --glass-bg: rgba(255, 255, 255, 0.2);
         }
@@ -105,31 +103,6 @@
             background: var(--primary-color);
             color: var(--secondary-color);
         }
-        .dark-mode {
-            background-color: var(--dark-mode-bg);
-            color: var(--dark-mode-text);
-        }
-        .dark-mode .project {
-            color: var(--light-mode-text); /* Dark mode text should be light for visibility */
-        }
-        .dark-mode-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            transition: background 0.3s;
-        }
-        .dark-mode-toggle:hover {
-            background: #0033aa;
-        }
         html {
             scroll-behavior: smooth;
         }
@@ -171,16 +144,8 @@
             <div class="slider">
                 <div class="slider-track">
                     <div class="project">
-                        <h3>Data Analysis of Inflation and Economic Variables</h3>
+                        <h3><a href="data_analysis_of_inflation.html">👉🏼 Data Analysis of Inflation and Economic Variables 👈🏼</a></h3>
                         <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
-                    </div>
-                    <div class="project">
-                        <h3>Quantitative Finance Tools</h3>
-                        <p>A Python-based toolkit for stochastic simulations and financial modeling.</p>
-                    </div>
-                    <div class="project">
-                        <h3>Predictive Models with R</h3>
-                        <p>Implementation of predictive analytics for economic trends using R programming.</p>
                     </div>
                 </div>
                 <div class="slider-buttons">
@@ -203,13 +168,12 @@
         </section>
         <section id="contact" class="section">
             <h2>Contact</h2>
-            <p>If you'd like to connect, feel free to reach out via <a href="mailto:lorenzo.pisa@example.com">email</a> or visit my <a href="https://github.com/lorenzopisa" target="_blank">GitHub</a>.</p>
+            <p>If you'd like to connect, feel free to reach out via <a href="mailto:pisalollo@gmail.com">pisalollo@gmail.com</a></p>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Lorenzo Pisa. All Rights Reserved.</p>
     </footer>
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">☾</button>
     <script>
         let currentSlide = 0;
 
@@ -221,16 +185,6 @@
 
             currentSlide = (currentSlide + direction + maxSlides) % maxSlides;
             sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
-        // Automatically set dark mode based on system preference
-        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (prefersDarkScheme) {
-            document.body.classList.add('dark-mode');
         }
 
         // Add touch support for slider
