@@ -1,241 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lorenzo Pisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #0011cc;
-            --secondary-color: #ffffff;
-            --light-mode-text: #333333;
-            --glass-bg: rgba(255, 255, 255, 0.2);
-        }
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            color: var(--primary-color);
-            background-color: var(--secondary-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            color: var(--primary-color);
-            padding: 1rem 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        header h1 {
-            margin: 0;
-        }
-        nav {
-            margin-top: 10px;
-        }
-        nav a {
-            color: var(--primary-color);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+      :root {
+        --primary-color: #0011cc;
+        --secondary-color: #ffffff;
+        --light-mode-text: #333333;
+        --glass-bg: rgba(255, 255, 255, 0.2);
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        color: var(--primary-color);
+        padding: 1rem 0;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      header h1 {
+        margin: 0;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      nav a {
+        color: var(--primary-color);
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background: var(--secondary-color);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .slider {
+        display: flex;
+        overflow: hidden;
+        margin: 1rem 0;
+        position: relative;
+        touch-action: pan-y;
+        flex-direction: column;
+        /* Oriented vertically */
+        align-items: center;
+      }
+
+      .slider-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+
+      .slider .project {
+        width: 80%;
+        /* Box smaller than container */
+        max-width: 350px;
+        flex: 0 0 auto;
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 0 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .project h3 {
+        margin-top: 0;
+      }
+
+      .slider-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .slider-button {
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        margin: 0 5px;
+      }
+
+      .section {
+        margin-top: 2rem;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 2rem;
+        padding: 1rem;
+        background: var(--primary-color);
+        color: var(--secondary-color);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: var(--secondary-color);
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .slider {
-            display: flex;
-            overflow: hidden;
-            margin: 1rem 0;
-            position: relative;
-            touch-action: pan-y;
-            flex-direction: column; /* Oriented vertically */
-            align-items: center;
-        }
-        .slider-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .slider .project {
-            width: 80%; /* Box smaller than container */
-            max-width: 350px;
-            flex: 0 0 auto;
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .project h3 {
-            margin-top: 0;
-        }
-        .slider-buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .slider-button {
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            margin: 0 5px;
-        }
-        .section {
-            margin-top: 2rem;
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            background: var(--primary-color);
-            color: var(--secondary-color);
-        }
-        html {
-            scroll-behavior: smooth;
+          padding: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            .slider .project {
-                width: 90%; /* Smaller width for mobile devices */
-                max-width: 300px;
-            }
-            nav a {
-                margin: 0 10px;
-            }
+        .slider .project {
+          width: 90%;
+          /* Smaller width for mobile devices */
+          max-width: 300px;
         }
+
+        nav a {
+          margin: 0 10px;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Lorenzo Pisa - Portfolio</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#contact">Contact</a>
-        </nav>
+      <h1>Lorenzo Pisa - Portfolio</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
     <main class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Welcome to my portfolio! My name is Lorenzo Pisa, and I am a Mathematics graduate currently pursuing a Master's degree in Economics. I am passionate about economic systems and models, with a particular focus on monetary policy. My diploma in Computer Science and Telecommunications has equipped me with strong problem-solving skills and a solid technical foundation. I thrive in dynamic, intellectually stimulating environments and avoid repetitive or unchallenging work.</p>
-        </section>
-        <section id="projects" class="section">
-            <h2>Projects</h2>
-            <div class="slider">
-                <div class="slider-track">
-                    <div class="project">
-                        <h3><a href="data_analysis_of_inflation.html" style="color:#ffffff;">👉🏼 Data Analysis of Inflation and Economic Variables 👈🏼 (WIP)</a></h3>
-                        <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
-                    </div>
-                </div>
-                <div class="slider-buttons">
-                    <button class="slider-button" onclick="moveSlider(-1)">←</button>
-                    <button class="slider-button" onclick="moveSlider(1)">→</button>
-                </div>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio! My name is Lorenzo Pisa, and I am a Mathematics graduate currently pursuing a Master's degree in Economics. I am passionate about economic systems and models, with a particular focus on monetary policy. My diploma in Computer Science and Telecommunications has equipped me with strong problem-solving skills and a solid technical foundation. I thrive in dynamic, intellectually stimulating environments and avoid repetitive or unchallenging work.</p>
+      </section>
+      <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="slider">
+          <div class="slider-track">
+            <div class="project">
+              <h3>
+                <a href="data_analysis_of_inflation.html" style="color:#ffffff;">👉🏼 Data Analysis of Inflation and Economic Variables 👈🏼 (WIP)</a>
+              </h3>
+              <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
             </div>
-        </section>
-        <section id="skills" class="section">
-            <h2>Skills</h2>
-           
-<ul>
-  <li>HTML</li>
-  <li>C++</li>
-  <li>PhpMyAdmin</li>
-  <li>PHP</li>
-  <li>Flutter</li>
-  <li>CSS</li>
-  <li>Python</li>
-  <li>Hardware Programming (Arduino, Raspberry Pi3)</li>
-  <li>Mathematical Skills: Probability, Statistics, Data Analysis</li>
-  <li>Teaching: Experienced in teaching mathematics to high school students</li>
-  <li>Data Analysis: Experience in analyzing data (Ads and Statistics) from political campaigns and managing a <a href="https://www.facebook.com/CarnevaleStoricoSanthia/">Facebook page</a> for events with over 10,000 attendees</li>
-</ul>
-
-        </section>
-        <section id="education" class="section">
-            <h2>Education</h2>
-            <p><strong>Current: Master Degree in Economics</strong><br>
-University of Turin 🔗, September 2024 – 2026</p>
-
-<p><strong>Bachelor's Degree in Mathematics for Finance and Insurance</strong><br>
-University of Turin 🔗, September 2021 – September 2024</p>
-
-<p><strong>Diploma in Computer Science, Informatics</strong><br>
-September 2014 – July 2019</p>
-
-        </section>
-        <section id="experience" class="section">
-            <h2>Work Experience</h2>
-           <!-- <p>Internship at: Developed financial models and analyzed economic data trends.</p>-->
-            <p><strong>Mathematics Teacher</strong><br>
-<strong>I.I.S. "Galileo Ferraris" · Full-time</strong><br>
-October 2024 – Present · 3 months<br>
-Vercelli, Piedmont, Italy · On-site</p>
-
-<p><strong>Mathematics Teacher</strong><br>
-<strong>I.I.S. "A. Avogadro" · Full-time</strong><br>
-January 2022 – February 2022 · 2 months<br>
-Vercelli, Piedmont, Italy · On-site<br>
-Temporary high school mathematics teacher for grades 9 to 13.</p>
-        </section>
-        <section id="contact" class="section">
-            <h2>Contact</h2>
-            <p>If you'd like to connect, feel free to reach out via <a href="mailto:pisalollo@gmail.com">pisalollo@gmail.com</a></p>
-        </section>
+          </div>
+          <div class="slider-buttons">
+            <button class="slider-button" onclick="moveSlider(-1)">←</button>
+            <button class="slider-button" onclick="moveSlider(1)">→</button>
+          </div>
+        </div>
+      </section>
+      <section id="education" class="section">
+        <h2>Education</h2>
+        <p>
+          <strong>Current: Master Degree in Economics</strong>
+          <br> University of Turin 🔗, September 2024 – 2026
+        </p>
+        <p>
+          <strong>Bachelor's Degree in Mathematics for Finance and Insurance</strong>
+          <br> University of Turin 🔗, September 2021 – September 2024
+        </p>
+        <p>
+          <strong>Diploma in Computer Science, Informatics</strong>
+          <br> September 2014 – July 2019
+        </p>
+      </section>
+      <section id="experience" class="section">
+        <h2>Work Experience</h2>
+        <!-- <p>Internship at: Developed financial models and analyzed economic data trends.</p>-->
+        <p>
+          <strong>Mathematics Teacher</strong>
+          <br>
+          <strong>I.I.S. "Galileo Ferraris" · Full-time</strong>
+          <br> October 2024 – Present · 3 months <br> Vercelli, Piedmont, Italy · On-site
+        </p>
+        <p>
+          <strong>Mathematics Teacher</strong>
+          <br>
+          <strong>I.I.S. "A. Avogadro" · Full-time</strong>
+          <br> January 2022 – February 2022 · 2 months <br> Vercelli, Piedmont, Italy · On-site <br> Temporary high school mathematics teacher for grades 9 to 13.
+        </p>
+        <p>
+          <strong>Mobile Application Developer - Webmaster - Web Developer - Data Analyst & Social Media Manager</strong>
+          <br> strong>2019 – 2024 </strong>
+        </p>
+        <p>Since 2019, I have worked on commissioned projects, ranging from the creation and publication of smartphone apps, websites, and e-commerce platforms, to small full-stack development tasks. I have also been involved in the management, creation, and analysis of advertising campaigns for both large events and local elections, including planning and creating content for social media and managing those platforms.</p>
+      </section>
+      <section id="skills" class="section">
+        <h2>Skills</h2>
+        <ul>
+          <li>HTML</li>
+          <li>C++</li>
+          <li>PhpMyAdmin</li>
+          <li>PHP</li>
+          <li>Flutter</li>
+          <li>CSS</li>
+          <li>Python</li>
+          <li>Hardware Programming (Arduino, Raspberry Pi3)</li>
+          <li>Mathematical Skills: Probability, Statistics, Data Analysis</li>
+          <li>Teaching: Experienced in teaching mathematics to high school students</li>
+          <li>Data Analysis: Experience in analyzing data (Ads and Statistics) from political campaigns and managing a <a href="https://www.facebook.com/CarnevaleStoricoSanthia/">Facebook page</a> for events with over 10,000 attendees </li>
+        </ul>
+      </section>
+      <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>If you'd like to connect, feel free to reach out via <a href="mailto:pisalollo@gmail.com">pisalollo@gmail.com</a>
+        </p>
+      </section>
     </main>
     <footer>
-        <p>&copy; 2024 Lorenzo Pisa. All Rights Reserved.</p>
+      <p>&copy; 2024 Lorenzo Pisa. All Rights Reserved.</p>
     </footer>
     <script>
-        let currentSlide = 0;
+      let currentSlide = 0;
 
-        function moveSlider(direction) {
-            const sliderTrack = document.querySelector('.slider-track');
-            const projects = document.querySelectorAll('.project');
-            const projectWidth = projects[0].offsetWidth + 20; // Account for margin
-            const maxSlides = projects.length;
-
-            currentSlide = (currentSlide + direction + maxSlides) % maxSlides;
-            sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
+      function moveSlider(direction) {
+        const sliderTrack = document.querySelector('.slider-track');
+        const projects = document.querySelectorAll('.project');
+        const projectWidth = projects[0].offsetWidth + 20; // Account for margin
+        const maxSlides = projects.length;
+        currentSlide = (currentSlide + direction + maxSlides) % maxSlides;
+        sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
+      }
+      // Add touch support for slider
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const slider = document.querySelector('.slider');
+      slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX > touchEndX) {
+          moveSlider(1); // Swipe left to move right
+        } else {
+          moveSlider(-1); // Swipe right to move left
         }
-
-        // Add touch support for slider
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        slider.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX > touchEndX) {
-                moveSlider(1); // Swipe left to move right
-            } else {
-                moveSlider(-1); // Swipe right to move left
-            }
-        });
+      });
     </script>
-</body>
+  </body>
 </html>
