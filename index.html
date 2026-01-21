@@ -3,41 +3,52 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lorenzo Pisa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Lorenzo Pisa - Quantitative Analysis & Macroeconomic Modeling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        --primary-color: #0011cc;
+        
+        --primary-color: #003399; 
         --secondary-color: #ffffff;
-        --light-mode-text: #333333;
-        --glass-bg: rgba(255, 255, 255, 0.2);
+        --accent-color: #ffcc00;
+        --text-color: #333333;
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --section-bg: #f8f9fa;
       }
 
       body {
         margin: 0;
         font-family: 'Roboto', sans-serif;
-        color: var(--primary-color);
+        color: var(--text-color);
         background-color: var(--secondary-color);
-        transition: background-color 0.3s, color 0.3s;
+        line-height: 1.6;
       }
 
       header {
         background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        color: var(--primary-color);
+        border-bottom: 1px solid #e0e0e0;
         padding: 1rem 0;
         text-align: center;
         position: sticky;
         top: 0;
         z-index: 100;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       }
 
       header h1 {
         margin: 0;
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+      
+      header p {
+        margin: 5px 0 0;
+        font-weight: 300;
+        color: #666;
       }
 
       nav {
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
       nav a {
@@ -45,18 +56,61 @@
         text-decoration: none;
         margin: 0 15px;
         font-weight: bold;
-        cursor: pointer;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      nav a:hover {
+        text-decoration: underline;
       }
 
       .container {
-        max-width: 1000px;
-        margin: 2rem auto;
-        padding: 1rem;
-        background: var(--secondary-color);
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
       }
 
+      section {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Stile specifico per le liste di skills */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .skill-category h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        color: #444;
+        background: #eee;
+        padding: 8px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .skill-category ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .skill-category li {
+        margin-bottom: 5px;
+        padding-left: 10px;
+        border-left: 1px solid #ddd;
+      }
+
+      /* Slider per i progetti */
       .slider {
         display: flex;
         overflow: hidden;
@@ -64,7 +118,6 @@
         position: relative;
         touch-action: pan-y;
         flex-direction: column;
-        /* Oriented vertically */
         align-items: center;
       }
 
@@ -75,100 +128,222 @@
 
       .slider .project {
         width: 80%;
-        /* Box smaller than container */
-        max-width: 350px;
+        max-width: 500px; 
         flex: 0 0 auto;
         background: var(--primary-color);
         color: var(--secondary-color);
-        border-radius: 8px;
-        padding: 1rem;
+        border-radius: 4px;
+        padding: 1.5rem;
         margin: 0 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      .project h3 {
-        margin-top: 0;
+      .project h3 a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px dashed #fff;
       }
 
       .slider-buttons {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
       .slider-button {
-        background: var(--primary-color);
-        color: var(--secondary-color);
-        border: none;
+        background: transparent;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
         border-radius: 50%;
         width: 40px;
         height: 40px;
         cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         margin: 0 5px;
+        font-weight: bold;
+        transition: background 0.2s;
+      }
+      
+      .slider-button:hover {
+        background: var(--primary-color);
+        color: #fff;
       }
 
-      .section {
-        margin-top: 2rem;
+      /* Experience entries */
+      .job-entry {
+        margin-bottom: 1.5rem;
+        border-left: 3px solid #ddd;
+        padding-left: 15px;
+      }
+      
+      .job-entry h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+      
+      .job-meta {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 5px;
+        font-style: italic;
       }
 
       footer {
         text-align: center;
-        margin-top: 2rem;
-        padding: 1rem;
+        margin-top: 4rem;
+        padding: 2rem;
         background: var(--primary-color);
         color: var(--secondary-color);
+        font-size: 0.9rem;
       }
 
-      html {
-        scroll-behavior: smooth;
+      footer a {
+        color: #fff;
+        text-decoration: underline;
+      }
+      
+      /* Stile per il bottone Download PDF */
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; /* Spazio tra icona e testo */
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid transparent;
       }
 
-      /* Responsive Design */
+      .btn-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        text-decoration: none; /* Rimuove sottolineatura se ereditata */
+      }
+
+      .btn-download svg {
+        flex-shrink: 0;
+      }
+
+      /* Responsive */
       @media (max-width: 768px) {
-        .container {
-          padding: 1rem;
-        }
-
         .slider .project {
-          width: 90%;
-          /* Smaller width for mobile devices */
-          max-width: 300px;
-        }
-
-        nav a {
-          margin: 0 10px;
+          width: 85%; 
         }
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Lorenzo Pisa - Portfolio</h1>
+      <h1>Lorenzo Pisa</h1>
+      <p>M.Sc. Candidate in Economics | Mathematics Graduate</p>
+      <p>Quantitative Analysis & Macroeconomic Modeling</p>
       <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="#about">Profile</a>
         <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
+        <a href="#projects">Research</a>
         <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
+
     <main class="container">
+      
       <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my portfolio! My name is Lorenzo Pisa, and I am a Mathematics graduate currently pursuing a Master's degree in Economics. I am passionate about economic systems and models, with a particular focus on monetary policy. My diploma in Computer Science and Telecommunications has equipped me with strong problem-solving skills and a solid technical foundation. I thrive in dynamic, intellectually stimulating environments and avoid repetitive or unchallenging work.</p>
+        <h2>Professional Profile</h2>
+        <p>
+            Mathematics graduate currently pursuing a Master’s degree in Economics. I combine a rigorous mathematical foundation with advanced programming skills to approach economic problems with quantitative precision.
+          </p>
+          <p>
+            My academic interests are deeply rooted in the <strong>transmission mechanisms of monetary policy</strong> within the Euro Area. I am <strong>passionate about studying</strong> these dynamics using structural econometric models, aiming to bridge theoretical frameworks with data-driven evidence.
+          </p>
       </section>
-      <section id="projects" class="section">
-        <h2>Projects</h2>
+
+      <section id="skills">
+        <h2>Technical & Econometric Skills</h2>
+        <div class="skills-grid">
+          
+          <div class="skill-category">
+            <h3>Econometrics & Analysis</h3>
+            <ul>
+              <li><strong>Time Series Analysis:</strong> VAR, SVAR, FAVAR models, Cointegration, Impulse Response Functions.</li>
+              <li><strong>Monetary Policy:</strong> Identification of policy shocks, Shadow Rate analysis, Transmission mechanisms.</li>
+              <li><strong>Statistical Methods:</strong> PCA (Principal Component Analysis), Hypothesis Testing, Forecasting.</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Computational Tools</h3>
+            <ul>
+              <li><strong>MATLAB:</strong> Advanced proficiency (Macroeconomic modeling, replication of papers like Bernanke et al., 2005).</li>
+              <li><strong>Python:</strong> Pandas, NumPy, Statsmodels for data manipulation and econometric analysis.</li>
+              <li><strong>Data Management:</strong> SQL, Handling large macroeconomic datasets (ECB SDW, FRED).</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Development & Other</h3>
+            <ul>
+              <li><strong>Web & App:</strong> HTML/CSS, Flutter, PHP (Full-stack background).</li>
+              <li><strong>Soft Skills:</strong> Teaching complex quantitative concepts, Team Leadership (NASA/ESA competitions).</li>
+              <li><strong>Languages:</strong> Italian (Native), English.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Academic Projects & Research</h2>
         <div class="slider">
           <div class="slider-track">
+            
             <div class="project">
               <h3>
-                <a href="data_analysis_of_inflation.html" style="color:#ffffff;">👉🏼 Data Analysis of Inflation and Economic Variables 👈🏼 (WIP)</a>
+                <a href="https://github.com/pisalollo/bernanke_replication_euroarea" target="_blank">
+                  FAVAR Model Estimation (Euro Area) 
+                  <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                </a>
               </h3>
-              <p>An analysis project exploring the relationship between disposable income, GDP, monetary growth, and inflation using Python and Pandas.</p>
+              <p><strong>Code & Research</strong></p>
+              <p>Replication and adaptation of the Factor-Augmented Vector Autoregression (FAVAR) model by Bernanke, Boivin, and Eliasz (2005) applied to the Euro Area economy (2000–2025).</p>
+              <ul style="text-align: left; font-size: 0.9rem;">
+                <li>Extracted latent factors from large macroeconomic datasets using <strong>PCA</strong>.</li>
+                <li>Implemented <strong>Cholesky identification</strong> for monetary policy shocks.</li>
+                <li>Implemented <strong>Shadow Rate</strong>.</li>
+                <li>Compared standard VAR vs. FAVAR Impulse Response Functions (IRFs).</li>
+                <li><strong>Tech Stack:</strong> MATLAB methodology adaptation.</li>
+              </ul>
+
+              <div style="text-align: center;">
+                <a href="https://github.com/pisalollo/bernanke_replication_euroarea/blob/main/Bernanke_replication_ea.pdf" class="btn-download" target="_blank" download>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16L7 11L8.41 9.59L11 12.17V4H13V12.17L15.59 9.59L17 11L12 16ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z" fill="currentColor"/>
+                  </svg>
+                  Download (PDF)
+                </a>
+              </div>
+              </div>
+            <div class="project">
+              <h3>
+                <a href="https://pisalollo.github.io/data_analysis_of_inflation.html">
+                  Macroeconomic Data Analysis <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                </a>
+              </h3>
+              <p><strong>Statistical Analysis</strong></p>
+              <p>Investigation of the correlation between disposable income, GDP growth, M3 monetary aggregate, and inflation dynamics.</p>
+              <p style="font-size: 0.9rem;">Used Python (Pandas) to clean data and visualize trends for preliminary economic assessment.</p>
             </div>
+
           </div>
           <div class="slider-buttons">
             <button class="slider-button" onclick="moveSlider(-1)">←</button>
@@ -176,119 +351,104 @@
           </div>
         </div>
       </section>
-      <section id="education" class="section">
+
+      <section id="experience">
+        <h2>Professional Experience</h2>
+        
+        <div class="job-entry">
+          <h3>Mathematics Teacher (Substitute)</h3>
+          <div class="job-meta">I.I.S. "Galileo Ferraris", Vercelli · Oct 2024 – June 2025</div>
+          <p>
+            Responsible for teaching Mathematics to high school students. 
+            <br><em>Key relevance:</em> Refined ability to communicate complex quantitative concepts clearly to non-expert audiences—a crucial skill for policy briefing and reporting.
+          </p>
+        </div>
+
+        <div class="job-entry">
+          <h3>Mathematics Teacher (Substitute)</h3>
+          <div class="job-meta">I.I.S. "A. Avogadro", Vercelli · Jan 2022 – Feb 2022</div>
+        </div>
+
+        <div class="job-entry">
+          <h3>Full Stack Developer & Data Analyst</h3>
+          <div class="job-meta">Freelance · 2019 – 2024</div>
+          <p>Managed full lifecycle of web and mobile projects. Conducted data analysis for digital marketing campaigns and local elections, translating raw data into actionable strategies.</p>
+        </div>
+
+      </section>
+
+      <section id="education">
         <h2>Education</h2>
-        <p>
-          <strong>Current: Master Degree in Economics</strong>
-          <br> University of Turin 🔗, September 2024 – 2026
-        </p>
-        <p>
-          <strong>Bachelor's Degree in Mathematics for Finance and Insurance</strong>
-          <br> University of Turin 🔗, September 2021 – September 2024
-        </p>
-        <p>
-          <strong>Diploma in Computer Science, Informatics</strong>
-          <br> September 2014 – July 2019
-        </p>
+        <div class="job-entry" style="border-color: var(--primary-color);">
+          <h3>Master’s Degree in Economics</h3>
+          <div class="job-meta">University of Turin · Sept 2024 – 2026 (Expected)</div>
+          <p>Focus: Monetary Economics, Advanced Econometrics, Macroeconomic Dynamics.</p>
+        </div>
+
+        <div class="job-entry" style="border-color: var(--primary-color);">
+          <h3>Bachelor's Degree in Mathematics for Finance and Insurance</h3>
+          <div class="job-meta">University of Turin · 2021 – 2024</div>
+          <p>Strong foundation in Calculus, Linear Algebra, Probability Theory, and Statistics.</p>
+        </div>
       </section>
-      <section id="experience" class="section">
-        <h2>Work Experience</h2>
-        <!-- <p>Internship at: Developed financial models and analyzed economic data trends.</p>-->
-        <p>
-          <strong>Mathematics Teacher</strong>
-          <br>
-          <strong>I.I.S. "Galileo Ferraris" · Full-time</strong>
-          <br> October 2024 – Present · 3 months <br> Vercelli, Piedmont, Italy · On-site
-        </p>
-        <p>
-          <strong>Mathematics Teacher</strong>
-          <br>
-          <strong>I.I.S. "A. Avogadro" · Full-time</strong>
-          <br> January 2022 – February 2022 · 2 months <br> Vercelli, Piedmont, Italy · On-site <br> Temporary high school mathematics teacher for grades 9 to 13.
-        </p>
-        <p>
-          <strong>Mobile Application Developer - Webmaster - Web Developer - Data Analyst & Social Media Manager</strong>
-          <br> strong>2019 – 2024 </strong>
-        </p>
-        <p>Since 2019, I have worked on commissioned projects, ranging from the creation and publication of smartphone apps, websites, and e-commerce platforms, to small full-stack development tasks. I have also been involved in the management, creation, and analysis of advertising campaigns for both large events and local elections, including planning and creating content for social media and managing those platforms.</p>
-      </section>
-      <section id="skills" class="section">
-        <h2>Skills</h2>
+
+      <section id="awards">
+        <h2>Awards & Leadership</h2>
         <ul>
-          <li>HTML</li>
-          <li>C++</li>
-          <li>PhpMyAdmin</li>
-          <li>PHP</li>
-          <li>Flutter</li>
-          <li>CSS</li>
-          <li>Python</li>
-          <li>Hardware Programming (Arduino, Raspberry Pi3)</li>
-          <li>Mathematical Skills: Probability, Statistics, Data Analysis</li>
-          <li>Teaching: Experienced in teaching mathematics to high school students</li>
-          <li>Data Analysis: Experience in analyzing data (Ads and Statistics) from political campaigns and managing a <a href="https://www.facebook.com/CarnevaleStoricoSanthia/">Facebook page</a> for events with over 10,000 attendees </li>
+          <li><strong>NASA/ESA ZeroRobotics:</strong> Team Leader for the international programming competition aboard the ISS. (Politecnico di Torino/MIT).</li>
+          <li><strong>Confindustria Award:</strong> Recognition for academic merit in scientific studies.</li>
         </ul>
       </section>
-     <section id="awards" class="section">
-  <h2>Awards and Competitions</h2>
-  <p>Throughout my journey, I have often worked in teams as the leader of teams. Below are the links to various competitions, including one of the most important, "ZEROROBOTICS," organized by NASA in collaboration with the European Space Agency and Boston University.</p>
-  
-  <h3>Competitions and Recognitions</h3>
-  <ul>
-    <li>
-      <strong>ZEROROBOTICS</strong> - Organized by NASA in collaboration with the European Space Agency and Boston University.
-      <br><a href="https://www.politocomunica.polito.it/press_room/comunicati/2018/successo_per_l_italia_nelle_semifinali_del_concorso_zero_robotics" target="_blank">Link to PolitoGiornale article - broken</a>
-    </li>
-    <li>
-      <strong>Confindustria Award</strong>
-      <br><a href="http://eusebiano.it/cronaca/ben-40-premi-di-studio-agli-allievi-vercellesi-e-valsesiani-piu-meritevoli/" target="_blank">Confindustria</a>
-    </li>
-    <li>
-      <strong>Prima Vercelli Article</strong>
-      <br><a href="https://primavercelli.it/cronaca/zero-robotics-gli-allievi-vercellesi-in-finale/?refresh_ce" target="_blank">Link to Prima Vercelli article</a>
-    </li>
-    <li>
-      <strong>RomaCUP Article</strong> 
-      <br><a href="" target="_blank">Link to RomaCUP article - broken</a>
-    </li>
-  </ul>
-</section>
 
-
-      <section id="contact" class="section">
+      <section id="contact">
         <h2>Contact</h2>
-        <p>If you'd like to connect, feel free to reach out via <a href="mailto:pisalollo@gmail.com">pisalollo@gmail.com</a>
-        </p>
+       
+        <p>📧 <a href="mailto:pisalollo@gmail.com" style="color: var(--primary-color);">pisalollo@gmail.com</a></p>
       </section>
+
     </main>
+
     <footer>
-      <p>&copy; 2024 Lorenzo Pisa. All Rights Reserved.</p>
+      <p>&copy; 2026 Lorenzo Pisa.</p>
     </footer>
+
     <script>
       let currentSlide = 0;
 
       function moveSlider(direction) {
         const sliderTrack = document.querySelector('.slider-track');
         const projects = document.querySelectorAll('.project');
-        const projectWidth = projects[0].offsetWidth + 20; // Account for margin
+        
+        if (projects.length === 0) return;
+
+        const style = window.getComputedStyle(projects[0]);
+        const marginLeft = parseFloat(style.marginLeft);
+        const marginRight = parseFloat(style.marginRight);
+        const projectWidth = projects[0].offsetWidth + marginLeft + marginRight;
+
         const maxSlides = projects.length;
         currentSlide = (currentSlide + direction + maxSlides) % maxSlides;
+        
         sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
       }
-      // Add touch support for slider
+
+      // Touch support
       let touchStartX = 0;
       let touchEndX = 0;
       const slider = document.querySelector('.slider');
+      
       slider.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
-      });
+      }, {passive: true});
+      
       slider.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX > touchEndX) {
-          moveSlider(1); // Swipe left to move right
-        } else {
-          moveSlider(-1); // Swipe right to move left
+        if (touchStartX - touchEndX > 50) {
+          moveSlider(1); 
+        } else if (touchEndX - touchStartX > 50) {
+          moveSlider(-1); 
         }
-      });
+      }, {passive: true});
     </script>
   </body>
 </html>
