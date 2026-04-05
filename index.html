@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        
         --primary-color: #003399; 
         --secondary-color: #ffffff;
         --accent-color: #ffcc00;
@@ -83,7 +82,6 @@
         margin-bottom: 1.5rem;
       }
 
-      /* Stile specifico per le liste di skills */
       .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -110,7 +108,6 @@
         border-left: 1px solid #ddd;
       }
 
-      /* Slider per i progetti */
       .slider {
         display: flex;
         overflow: hidden;
@@ -168,7 +165,6 @@
         color: #fff;
       }
 
-      /* Experience entries */
       .job-entry {
         margin-bottom: 1.5rem;
         border-left: 3px solid #ddd;
@@ -201,12 +197,11 @@
         text-decoration: underline;
       }
       
-      /* Stile per il bottone Download PDF */
       .btn-download {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px; /* Spazio tra icona e testo */
+        gap: 8px;
         background-color: var(--secondary-color);
         color: var(--primary-color);
         padding: 10px 20px;
@@ -222,14 +217,13 @@
       .btn-download:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        text-decoration: none; /* Rimuove sottolineatura se ereditata */
+        text-decoration: none;
       }
 
       .btn-download svg {
         flex-shrink: 0;
       }
 
-      /* Responsive */
       @media (max-width: 768px) {
         .slider .project {
           width: 85%; 
@@ -257,11 +251,11 @@
       <section id="about">
         <h2>Professional Profile</h2>
         <p>
-            Mathematics graduate currently pursuing a Master’s degree in Economics. I combine a rigorous mathematical foundation with advanced programming skills to approach economic problems with quantitative precision.
-          </p>
-          <p>
-            My academic interests are deeply rooted in the <strong>transmission mechanisms of monetary policy</strong> within the Euro Area. I am <strong>passionate about studying</strong> these dynamics using structural econometric models, aiming to bridge theoretical frameworks with data-driven evidence.
-          </p>
+          Mathematics graduate currently pursuing a Master's degree in Economics. I combine a rigorous mathematical foundation with advanced programming skills to approach economic problems with quantitative precision.
+        </p>
+        <p>
+          My academic interests are deeply rooted in the <strong>transmission mechanisms of monetary policy</strong> within the Euro Area. I am <strong>passionate about studying</strong> these dynamics using structural econometric models, aiming to bridge theoretical frameworks with data-driven evidence.
+        </p>
       </section>
 
       <section id="skills">
@@ -302,7 +296,8 @@
         <h2>Academic Projects & Research</h2>
         <div class="slider">
           <div class="slider-track">
-            
+
+            <!-- PROJECT 1: FAVAR -->
             <div class="project">
               <h3>
                 <a href="https://github.com/pisalollo/bernanke_replication_euroarea" target="_blank">
@@ -321,7 +316,6 @@
                 <li>Compared standard VAR vs. FAVAR Impulse Response Functions (IRFs).</li>
                 <li><strong>Tech Stack:</strong> MATLAB methodology adaptation.</li>
               </ul>
-
               <div style="text-align: center;">
                 <a href="https://github.com/pisalollo/bernanke_replication_euroarea/blob/main/Bernanke_replication_ea.pdf" class="btn-download" target="_blank" download>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -330,44 +324,39 @@
                   Download (PDF)
                 </a>
               </div>
-              </div>
+            </div>
+            <!-- END PROJECT 1 -->
+
+            <!-- PROJECT 2: SRTSM -->
             <div class="project">
               <h3>
-    <a href="https://github.com/pisalollo/Euro-Area-Shadow-Rate-Term-Structure-Model-SRTSM-" target="_blank">
-      Euro Area SRTSM — Shadow Rate Model
-      <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-      </svg>
-    </a>
-  </h3>
-  <p><strong>Code &amp; Research</strong></p>
-  <p>MATLAB implementation of a Shadow Rate Term Structure Model (SRTSM) for the Euro Area, replicating and extending Lemke &amp; Vladu (2017) to estimate the latent shadow short rate during the Effective Lower Bound (ELB) period.</p>
-  <ul style="text-align: left; font-size: 0.9rem;">
-    <li>Baseline affine term structure model via <strong>Joslin, Singleton &amp; Zhu (2011)</strong> with MLE estimation.</li>
-    <li><strong>Extended Kalman Filter (EKF)</strong> for non-linear shadow rate extraction.</li>
-    <li><strong>Wu &amp; Xia (2016)</strong> analytical approximation for bond pricing — numerical stability e Jacobians analitici.</li>
-    <li>Due specifiche: <strong>lower bound fisso</strong> e <strong>ELB time-varying</strong> ancorato al Deposit Facility Rate ECB.</li>
-    <li>Grid search su log-likelihood — ELB calibrato a ~−65/−70 bps (picco ciclo espansivo).</li>
-    <li><strong>Tech Stack:</strong> MATLAB, ECB SDW (AAA Government Yield Curve).</li>
-  </ul>
-             <!-- <h3>
-                <a href="https://pisalollo.github.io/data_analysis_of_inflation.html">
-                  Macroeconomic Data Analysis <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://github.com/pisalollo/Euro-Area-Shadow-Rate-Term-Structure-Model-SRTSM-" target="_blank">
+                  Euro Area SRTSM — Shadow Rate Model
+                  <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                   </svg>
                 </a>
               </h3>
-              <p><strong>Statistical Analysis</strong></p>
-              <p>Investigation of the correlation between disposable income, GDP growth, M3 monetary aggregate, and inflation dynamics.</p>
-              <p style="font-size: 0.9rem;">Used Python (Pandas) to clean data and visualize trends for preliminary economic assessment.</p>
-            </div>-->
+              <p><strong>Code & Research</strong></p>
+              <p>MATLAB implementation of a Shadow Rate Term Structure Model (SRTSM) for the Euro Area, replicating and extending Lemke &amp; Vladu (2017) to estimate the latent shadow short rate during the Effective Lower Bound (ELB) period.</p>
+              <ul style="text-align: left; font-size: 0.9rem;">
+                <li>Baseline affine term structure model via <strong>Joslin, Singleton &amp; Zhu (2011)</strong> with MLE estimation.</li>
+                <li><strong>Extended Kalman Filter (EKF)</strong> for non-linear shadow rate extraction.</li>
+                <li><strong>Wu &amp; Xia (2016)</strong> analytical approximation for bond pricing — numerical stability and analytical Jacobians.</li>
+                <li>Two specifications: <strong>fixed lower bound</strong> and <strong>time-varying ELB</strong> anchored to the ECB Deposit Facility Rate.</li>
+                <li>Grid search log-likelihood profiling — ELB calibrated at ~−65/−70 bps (peak easing cycle).</li>
+                <li><strong>Tech Stack:</strong> MATLAB, ECB SDW (AAA Government Yield Curve).</li>
+              </ul>
+            </div>
+            <!-- END PROJECT 2 -->
 
-          </div>
+          </div><!-- end slider-track -->
+
           <div class="slider-buttons">
             <button class="slider-button" onclick="moveSlider(-1)">←</button>
             <button class="slider-button" onclick="moveSlider(1)">→</button>
           </div>
-        </div>
+        </div><!-- end slider -->
       </section>
 
       <section id="experience">
@@ -398,7 +387,7 @@
       <section id="education">
         <h2>Education</h2>
         <div class="job-entry" style="border-color: var(--primary-color);">
-          <h3>Master’s Degree in Economics</h3>
+          <h3>Master's Degree in Economics</h3>
           <div class="job-meta">University of Turin · Sept 2024 – 2026 (Expected)</div>
           <p>Focus: Monetary Economics, Advanced Econometrics, Macroeconomic Dynamics.</p>
         </div>
@@ -420,7 +409,6 @@
 
       <section id="contact">
         <h2>Contact</h2>
-       
         <p>📧 <a href="mailto:pisalollo@gmail.com" style="color: var(--primary-color);">pisalollo@gmail.com</a></p>
       </section>
 
@@ -450,7 +438,6 @@
         sliderTrack.style.transform = `translateX(-${currentSlide * projectWidth}px)`;
       }
 
-      // Touch support
       let touchStartX = 0;
       let touchEndX = 0;
       const slider = document.querySelector('.slider');
