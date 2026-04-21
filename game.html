@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Gioco della Finanziaria: Missione Pensioni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        input[type=range] { accent-color: #4f46e5; cursor: pointer; }
+        .slider-red { accent-color: #ef4444; }
+        .slider-blue { accent-color: #3b82f6; }
+        /* Animazione per la vittoria */
+        @keyframes pulse-win {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-win { animation: pulse-win 1.5s infinite; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-4">
+
+    <div class="max-w-7xl mx-auto space-y-8">
+        
+        <div class="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-3xl shadow-2xl p-8 border-4 border-indigo-950 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col items-center text-center">
+                <span class="uppercase tracking-widest text-indigo-300 font-bold text-sm mb-2">Simulatore Legge di Bilancio 2024</span>
+                <h1 class="text-4xl font-black mb-4">MISSIONE: SALVARE I CONTI</h1>
+                <p class="text-lg text-indigo-200 mb-6 max-w-2xl">
+                    Il Governo ti ha nominato Ministro dell'Economia. Devi trovare le coperture finanziarie agendo su pensioni e fisco, cercando di non far arrabbiare troppi elettori.
+                </p>
+                
+                <div class="flex items-center space-x-4 mb-6 bg-indigo-950/50 p-4 rounded-2xl">
+                    <label class="font-bold text-xl uppercase tracking-wider text-indigo-100">Obiettivo Risparmio Netto:</label>
+                    <input type="number" id="target-savings" value="3000" class="text-indigo-900 font-black text-2xl p-2 rounded-xl w-40 text-center focus:ring-4 focus:ring-indigo-400 outline-none" oninput="updateDashboard()">
+                    <span class="font-bold text-xl text-indigo-100">Mln di €</span>
+                </div>
+
+                <div class="w-full max-w-3xl bg-indigo-950 rounded-full h-10 relative overflow-hidden border-2 border-indigo-400 shadow-inner">
+                    <div id="progress-bar" class="bg-blue-500 h-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                    <div id="progress-text" class="absolute inset-0 flex items-center justify-center font-black text-lg tracking-wide drop-shadow-md">0 / 3000 Mln € (0%)</div>
+                </div>
+
+                <div id="win-message" class="hidden mt-6 bg-yellow-400 text-yellow-900 font-black text-2xl py-3 px-8 rounded-full shadow-lg border-4 border-yellow-300 animate-win">
+                    🎉 OBIETTIVO FINANZIARIO RAGGIUNTO! 🎉
+                </div>
+            </div>
+            
+            <div class="absolute -right-20 -top-20 opacity-10">
+                <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border border-gray-200">
+            <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                <h3 class="text-red-800 font-bold uppercase text-xs tracking-wider mb-1">Pensionati Tagliati (Scontenti)</h3>
+                <p id="stat-colpiti" class="text-3xl font-black text-red-600">0 <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-red-500 mt-1">0% del totale</span></p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 text-center">
+                <h3 class="text-gray-500 font-bold uppercase text-xs tracking-wider mb-1">Pensionati Invariati (Neutri)</h3>
+                <p id="stat-neutri" class="text-3xl font-black text-gray-700">16.3 <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-gray-500 mt-1">100% del totale</span></p>
+            </div>
+            <div class="bg-green-50 p-4 rounded-2xl border border-green-100 text-center">
+                <h3 class="text-green-800 font-bold uppercase text-xs tracking-wider mb-1">Pensionati Aiutati (Sostenitori)</h3>
+                <p id="stat-aiutati" class="text-3xl font-black text-green-600">0 <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-green-500 mt-1">0% del totale</span></p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
+            <div class="bg-gray-900 p-4 text-white flex justify-between items-center">
+                <h2 class="text-lg font-bold uppercase tracking-widest">Leva 1: Taglio Prestazioni (Lordi)</h2>
+                <div id="risultato-lordo" class="text-right text-sm">...</div>
+            </div>
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-4 space-y-6 bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                    <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                        <label class="block text-xs font-black text-amber-800 uppercase mb-2 italic text-center">Vincolo di Intoccabilità</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Proteggi redditi sotto: <span id="val-limit" class="font-bold text-amber-700">1500 €</span></label>
+                        <input type="range" id="limit" min="0" max="3000" step="50" value="1500" class="w-full" oninput="updateDashboard()">
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-red-600 text-sm uppercase">Modulazione Taglio</h4>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Soglia (St): <span id="val-st" class="font-bold">3000 €</span></label>
+                            <input type="range" id="st" min="1000" max="5000" step="50" value="3000" class="w-full slider-red" oninput="updateDashboard()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Taglio Max: <span id="val-pt" class="font-bold">0 %</span></label>
+                            <input type="range" id="pt" min="0" max="50" step="1" value="0" class="w-full slider-red" oninput="updateDashboard()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Ripidezza (k): <span id="val-k" class="font-bold">0.005</span></label>
+                            <input type="range" id="k" min="0.001" max="0.02" step="0.001" value="0.005" class="w-full slider-red" oninput="updateDashboard()">
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8">
+                    <div class="relative h-64 w-full"><canvas id="chartLordo"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
+            <div class="bg-indigo-900 p-4 text-white flex justify-between items-center">
+                <h2 class="text-lg font-bold uppercase tracking-widest">Leva 2: Tassazione (IRPEF)</h2>
+                <div id="risultato-fisco" class="text-right text-sm">...</div>
+            </div>
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-4 space-y-6 bg-indigo-50 p-5 rounded-2xl border border-indigo-100">
+                    <div>
+                        <h4 class="font-bold text-indigo-800 text-sm uppercase mb-3 text-center">Modifica Scaglioni (Annuo)</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">1° Scaglione: <span id="val-tr1" class="text-indigo-700">28.000 €</span></label>
+                                <input type="range" id="tr1" min="15000" max="35000" step="1000" value="28000" class="w-full slider-blue" oninput="updateDashboard()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">2° Scaglione: <span id="val-tr2" class="text-indigo-700">50.000 €</span></label>
+                                <input type="range" id="tr2" min="36000" max="70000" step="1000" value="50000" class="w-full slider-blue" oninput="updateDashboard()">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="border-indigo-200">
+                    <div>
+                        <h4 class="font-bold text-indigo-800 text-sm uppercase mb-3 text-center">Modifica Aliquote (%)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold w-8 text-gray-500">1°:</span>
+                                <input type="range" id="rate1" min="10" max="30" step="1" value="23" class="w-full slider-blue" oninput="updateDashboard()">
+                                <span id="val-r1" class="text-sm font-bold w-10 text-indigo-700">23%</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold w-8 text-gray-500">2°:</span>
+                                <input type="range" id="rate2" min="25" max="45" step="1" value="33" class="w-full slider-blue" oninput="updateDashboard()">
+                                <span id="val-r2" class="text-sm font-bold w-10 text-indigo-700">33%</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold w-8 text-gray-500">3°:</span>
+                                <input type="range" id="rate3" min="35" max="70" step="1" value="43" class="w-full slider-blue" oninput="updateDashboard()">
+                                <span id="val-r3" class="text-sm font-bold w-10 text-indigo-700">43%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 flex flex-col justify-center">
+                    <h3 class="text-center text-xs font-black text-gray-400 uppercase mb-2">Variazione NETTA in Tasca al Pensionato (€/mese)</h3>
+                    <div class="relative h-64 w-full"><canvas id="chartFisco"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATI INPS
+        const x_mid = [250, 750, 1250, 1750, 2250, 2750, 3250, 3750, 4250, 4750, 5500];
+        const num_p = [1688187, 2894224, 2842180, 2740844, 2128910, 1616775, 1048541, 492679, 252237, 151236, 450067];
+        const spesa_m = [6197, 26034, 43028, 57772, 57195, 52799, 40449, 22007, 12796, 8595, 37259];
+        const labels = ["<500€", "500-1k€", "1k-1.5k€", "1.5k-2k€", "2k-2.5k€", "2.5k-3k€", "3k-3.5k€", "3.5k-4k€", "4k-4.5k€", "4.5k-5k€", ">5k€"];
+        
+        // Calcolo totale pensionati una volta per tutte
+        const tot_pensionati = num_p.reduce((a, b) => a + b, 0);
+
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        const ctxL = document.getElementById('chartLordo').getContext('2d');
+        let chartL = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: 'Spesa Lorda Attuale', data: spesa_m, borderColor: '#9ca3af', borderDash:[5,5], tension: 0.4 },
+                    { label: 'Spesa Lorda Riformata', data: [], borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.2)', fill: true, tension: 0.4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        const ctxF = document.getElementById('chartFisco').getContext('2d');
+        let chartF = new Chart(ctxF, {
+            type: 'bar',
+            data: { labels: labels, datasets: [{ label: 'Variazione Netta (€)', data: [], backgroundColor: [] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+
+        function getIrpef(redditoAnnuo, tr1, tr2, r1, r2, r3) {
+            let detrazione = 1955; 
+            let imposta = 0;
+            if (redditoAnnuo <= tr1) imposta = redditoAnnuo * (r1 / 100);
+            else if (redditoAnnuo <= tr2) imposta = (tr1 * (r1 / 100)) + ((redditoAnnuo - tr1) * (r2 / 100));
+            else imposta = (tr1 * (r1 / 100)) + ((tr2 - tr1) * (r2 / 100)) + ((redditoAnnuo - tr2) * (r3 / 100));
+            return Math.max(0, imposta - detrazione);
+        }
+
+        function updateDashboard() {
+            // UI Lordo
+            const limit = parseFloat(document.getElementById('limit').value);
+            const st = parseFloat(document.getElementById('st').value);
+            const pt = parseFloat(document.getElementById('pt').value) / 100;
+            const k = parseFloat(document.getElementById('k').value);
+
+            // UI Fisco
+            const tr1 = parseFloat(document.getElementById('tr1').value);
+            const tr2 = parseFloat(document.getElementById('tr2').value);
+            const r1 = parseFloat(document.getElementById('rate1').value);
+            const r2 = parseFloat(document.getElementById('rate2').value);
+            const r3 = parseFloat(document.getElementById('rate3').value);
+
+            // UI Game Target
+            const target_savings = parseFloat(document.getElementById('target-savings').value) || 0;
+
+            document.getElementById('val-limit').innerText = limit + " €";
+            document.getElementById('val-st').innerText = st + " €";
+            document.getElementById('val-pt').innerText = (pt * 100).toFixed(0) + " %";
+            document.getElementById('val-k').innerText = k.toFixed(3);
+            document.getElementById('val-tr1').innerText = tr1.toLocaleString('it-IT') + " €";
+            document.getElementById('val-tr2').innerText = tr2.toLocaleString('it-IT') + " €";
+            document.getElementById('val-r1').innerText = r1 + "%";
+            document.getElementById('val-r2').innerText = r2 + "%";
+            document.getElementById('val-r3').innerText = r3 + "%";
+
+            let spesa_nuova_lorda = [];
+            let var_netta_mese = [];
+            let colors_fisco = [];
+            
+            let tot_risparmio_lordo = 0;
+            let tot_irpef_old = 0;
+            let tot_irpef_new = 0;
+
+            // Variabili per l'Impatto Sociale
+            let pop_colpiti = 0;
+            let pop_aiutati = 0;
+            let pop_neutri = 0;
+
+            for (let i = 0; i < x_mid.length; i++) {
+                let spesa_totale_old_M = spesa_m[i];
+                let lordo_annuo_old = (spesa_totale_old_M * 1000000) / num_p[i];
+                let lordo_mese_old = lordo_annuo_old / 13;
+                let irpef_old_annua = getIrpef(lordo_annuo_old, 28000, 50000, 23, 33, 43);
+                let netto_mese_old = (lordo_annuo_old - irpef_old_annua) / 13;
+                
+                tot_irpef_old += (irpef_old_annua * num_p[i]);
+
+                let R = 1; 
+                if (lordo_mese_old > limit) {
+                    R = 1 - (pt * (1 / (1 + Math.exp(-k * (lordo_mese_old - st)))));
+                }
+                
+                let lordo_mese_new = lordo_mese_old * R;
+                let lordo_annuo_new = lordo_mese_new * 13;
+                
+                let spesa_totale_new_M = (lordo_annuo_new * num_p[i]) / 1000000;
+                spesa_nuova_lorda.push(spesa_totale_new_M);
+                tot_risparmio_lordo += (spesa_totale_old_M - spesa_totale_new_M);
+
+                let irpef_new_annua = getIrpef(lordo_annuo_new, tr1, tr2, r1, r2, r3);
+                tot_irpef_new += (irpef_new_annua * num_p[i]);
+
+                let netto_mese_new = (lordo_annuo_new - irpef_new_annua) / 13;
+                let differenza_netta = netto_mese_new - netto_mese_old;
+                
+                var_netta_mese.push(differenza_netta);
+
+                // Calcolo Popolazione per il Bollettino Sociale (tolleranza 1 euro)
+                if (differenza_netta > 1) {
+                    colors_fisco.push('rgba(34, 197, 94, 0.8)'); 
+                    pop_aiutati += num_p[i];
+                } else if (differenza_netta < -1) {
+                    colors_fisco.push('rgba(239, 68, 68, 0.8)'); 
+                    pop_colpiti += num_p[i];
+                } else {
+                    colors_fisco.push('rgba(156, 163, 175, 0.3)'); 
+                    pop_neutri += num_p[i];
+                }
+            }
+
+            // Update Charts
+            chartL.data.datasets[1].data = spesa_nuova_lorda;
+            chartL.update();
+            chartF.data.datasets[0].data = var_netta_mese;
+            chartF.data.datasets[0].backgroundColor = colors_fisco;
+            chartF.update();
+
+            // Aggiornamento Bollettino Sociale
+            const perc_colpiti = ((pop_colpiti / tot_pensionati) * 100).toFixed(1);
+            const perc_aiutati = ((pop_aiutati / tot_pensionati) * 100).toFixed(1);
+            const perc_neutri = ((pop_neutri / tot_pensionati) * 100).toFixed(1);
+
+            document.getElementById('stat-colpiti').innerHTML = `${(pop_colpiti/1e6).toFixed(2)} <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-red-500 mt-1">${perc_colpiti}% del totale</span>`;
+            document.getElementById('stat-aiutati').innerHTML = `${(pop_aiutati/1e6).toFixed(2)} <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-green-500 mt-1">${perc_aiutati}% del totale</span>`;
+            document.getElementById('stat-neutri').innerHTML = `${(pop_neutri/1e6).toFixed(2)} <span class="text-lg font-bold">Mln</span> <span class="block text-sm text-gray-500 mt-1">${perc_neutri}% del totale</span>`;
+
+            // Aggiornamento Economico Reale
+            let gettito_IRPEF_M = (tot_irpef_new - tot_irpef_old) / 1000000;
+            let saldo_reale_M = tot_risparmio_lordo + gettito_IRPEF_M;
+
+            document.getElementById('risultato-lordo').innerHTML = `Risparmio Previdenziale: <b class="text-red-400">+${tot_risparmio_lordo.toFixed(0)} Mln €</b>`;
+            document.getElementById('risultato-fisco').innerHTML = `Variazione IRPEF: <b>${gettito_IRPEF_M > 0 ? '+':''}${gettito_IRPEF_M.toFixed(0)} Mln €</b>`;
+
+            // =====================================
+            // GAMIFICATION LOGIC (Barra e Vittoria)
+            // =====================================
+            let current_progress = 0;
+            let progress_bar = document.getElementById('progress-bar');
+            let win_msg = document.getElementById('win-message');
+            
+            if (target_savings > 0) {
+                // Calcola percentuale completamento (fermandosi al 100%)
+                current_progress = Math.max(0, Math.min(100, (saldo_reale_M / target_savings) * 100));
+            } else {
+                current_progress = 100; // Se l'obiettivo è 0, è sempre vinto
+            }
+
+            // Colore dinamico della barra
+            progress_bar.style.width = current_progress + '%';
+            if (current_progress < 50) progress_bar.className = "bg-red-500 h-full transition-all duration-500 ease-out";
+            else if (current_progress < 100) progress_bar.className = "bg-blue-500 h-full transition-all duration-500 ease-out";
+            else progress_bar.className = "bg-yellow-400 h-full transition-all duration-500 ease-out shadow-[0_0_15px_rgba(250,204,21,1)]"; // Glow effect
+
+            document.getElementById('progress-text').innerText = `${saldo_reale_M.toFixed(0)} / ${target_savings} Mln € (${current_progress.toFixed(1)}%)`;
+
+            // Win Condition
+            if (saldo_reale_M >= target_savings && target_savings > 0) {
+                win_msg.classList.remove('hidden');
+            } else {
+                win_msg.classList.add('hidden');
+            }
+        }
+
+        updateDashboard();
+    </script>
+</body>
+</html>
